@@ -1,1 +1,5 @@
 hello.txt
+*.i
+*.o
+*.s
+firmware.elf
