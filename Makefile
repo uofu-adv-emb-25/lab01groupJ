@@ -6,6 +6,15 @@ CPP=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-cpp
 CC=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-gcc
 AS=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-as
 
+LD=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-ld
+SRC=main.c second.c
+OBJS=$(patsubst %.c,%.o,$(SRC))
+
+all: firmware.elf
+
+firmware.elf: $(OBJS)
+	$(LD) -o $@ $^
+
 %.s: %.i
 	$(CC) -S $@
 
@@ -18,4 +27,4 @@ AS=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-as
 clean:
 	rm -f main.i hello.txt
 
-.PHONY: clean
+.PHONY: clean all
