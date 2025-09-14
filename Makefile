@@ -9,10 +9,11 @@ AS=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-as
 LD=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-ld
 SRC=main.c second.c
 OBJS=$(patsubst %.c,%.o,$(SRC))
+FILE=$(patsubst %.c,%.i,$(SRC))
 
 all: firmware.elf
 
-firmware.elf: $(OBJS)
+firmware.elf: $(OBJS) 
 	$(LD) -o $@ $^
 
 %.s: %.i
@@ -22,9 +23,9 @@ firmware.elf: $(OBJS)
 	$(AS) $< -o $@
 
 %.i: %.c
-	$(CPP) $< > $@
+	$(CPP) $< -o $@
 
 clean:
-	rm -f main.i hello.txt
+	rm -f $(OBJS) $(patsubst %.c,%.i,$(SRC)) $(patsubst %.c,%.s,$(SRC)) firmware.elf 
 
 .PHONY: clean all
