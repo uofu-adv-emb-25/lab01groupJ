@@ -1,6 +1,3 @@
-hello.txt:
-	echo "hello world!" > hello.txt
-
 PICO_TOOLCHAIN_PATH?=~/.pico-sdk/toolchain/14_2_Rel1
 CPP=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-cpp
 CC=$(PICO_TOOLCHAIN_PATH)/bin/arm-none-eabi-gcc
@@ -13,6 +10,9 @@ FILE=$(patsubst %.c,%.i,$(SRC))
 
 all: firmware.elf
 
+hello.txt:
+	echo "hello world!" > hello.txt
+	
 firmware.elf: $(OBJS) 
 	$(LD) -o $@ $^
 
