@@ -26,6 +26,6 @@ firmware.elf: $(OBJS)
 	$(CPP) $< -o $@
 
 clean:
-	rm -f $(OBJS) $(patsubst %.c,%.i,$(SRC)) $(patsubst %.c,%.s,$(SRC)) firmware.elf 
+	rm -f $(OBJS) $(patsubst %.c,%.i,$(SRC)) $(patsubst %.c,%.s,$(SRC)) firmware.elf hello.txt
 
 .PHONY: clean all
